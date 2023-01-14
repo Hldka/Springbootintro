@@ -1,0 +1,9 @@
+ DTO mantigi
+  niye ugrasiyorum cok önemli
+  path variable, Requestparam
+  RequestParam coklu durumlarda PathVariable tekli durumda
+  pathvariable de gizlilik var
+  bestpractice : tek data icin pathvariable
+  Requestparam mapleme mantigi ile gider
+DTO ve Pageble cok önemli
+niye bizim DTo 'ya ihtiyacim car . '

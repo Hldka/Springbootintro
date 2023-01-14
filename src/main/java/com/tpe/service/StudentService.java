@@ -42,7 +42,7 @@ public class StudentService {
     }
     public void updateStudent(Long id, StudentDTO studentDTO) {
         boolean existEmail = studentRepository.existsByEmail(studentDTO.getEmail());
-        Student student = findStudent(id);
+        Student student = findStudent(id);//önce bunu olusturuyoz
 
         if( existEmail && ! studentDTO.getEmail().equals(student.getEmail()) ) {
             throw new ConflictException("Email is already exist ");
@@ -65,6 +65,19 @@ public class StudentService {
 
 
     public Page<Student> getAllWithPage(Pageable pageable) {
-        return studentRepository.findAll(pageable);
+        return studentRepository.findAll(pageable);//SQL
+    }
+
+    public List<Student> findStudent(String lastName) {
+        return studentRepository.findByLastName(lastName);
+    }
+
+    public List<Student> findAllEqualsGrade(Integer grade) {
+        return studentRepository.findAllEqualsGrade(grade);
+    }
+
+    public StudentDTO findStudentDTOById(Long id) {
+        return (StudentDTO) studentRepository.findStudentDTOById(id).orElseThrow(()->
+                new ResourceNotFoundException("Student not found with id : " + id));
     }
 }
