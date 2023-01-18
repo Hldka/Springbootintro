@@ -3,6 +3,9 @@ package com.tpe.controller;
 import com.tpe.domain.Student;
 import com.tpe.dto.StudentDTO;
 import com.tpe.service.StudentService;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,13 +13,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @RestController
 @RequestMapping("/students") // http://localhost:8080/students
@@ -25,6 +30,7 @@ public class StudentController {
 
     @Autowired// her katman bir sonraki katmanla iletisme gecer
     private StudentService studentService;
+    Logger logger = (Logger) LoggerFactory.getLogger(StudentController.class);
 
 
     // !!! Bütün öğrenciler gelsin
@@ -128,6 +134,10 @@ public class StudentController {
 
         return ResponseEntity.ok(studentDTO);
     }
-
+    @GetMapping("/welcome")  // http://localhost:8080/students/welcome + GET
+    public String welcome(HttpServletRequest request){ //  HttpServletRequest ile request e ulaştım
+        logger.warn("-------------------- Welcome {}", request.getServletPath());
+        return "Student Controller a Hoş Geldiniz";
+    }
 
 }
